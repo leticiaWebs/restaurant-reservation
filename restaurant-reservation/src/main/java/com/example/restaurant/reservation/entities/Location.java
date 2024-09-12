@@ -13,8 +13,8 @@ import lombok.Setter;
 @Embeddable
 public class Location {
     private String cep;
-    private String rua;
-    private int numero;
-    private String bairro;
+    private String street;
+    private int number;
+    private String district;
 
 }
