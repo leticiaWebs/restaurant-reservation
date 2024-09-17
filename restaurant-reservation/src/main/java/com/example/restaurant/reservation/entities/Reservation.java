@@ -1,9 +1,6 @@
 package com.example.restaurant.reservation.entities;
 
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,19 +11,24 @@ import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
+@Table(name = "tb_reservation")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Embeddable
+@Entity
 public class Reservation {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private LocalDate reservationDate;
     private LocalTime schedules;
+    private LocalTime openingTime;
+    private LocalTime closingTime;
+    private int capacity;
     @ElementCollection
     private Set<Integer> reservedTables = new HashSet<>();
-
     @ManyToOne
-    @JoinColumn(name = "tb_restaurant")
+    @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
     private Restaurant restaurant;
 }

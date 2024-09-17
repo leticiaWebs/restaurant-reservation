@@ -16,13 +16,21 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReservationDTO {
+    private Long id;
     private LocalDate reservationDate;
+    private LocalTime openingTime;
+    private LocalTime closingTime;
+    private int capacity;
     private LocalTime schedules;
     private Set<Integer> reservedTables = new HashSet<>();
 
-    public ReservationDTO(Reservation reservation){
-        this.reservationDate = reservation.getReservationDate();
-        this.schedules = reservation.getSchedules();
-        this.reservedTables = reservation.getReservedTables();
+    public ReservationDTO(Reservation entity){
+        this.id = entity.getId();
+        this.reservationDate = entity.getReservationDate();
+        this.openingTime = entity.getOpeningTime();
+        this.closingTime = entity.getClosingTime();
+        this.capacity = entity.getCapacity();
+        this.schedules = entity.getSchedules();
+        this.reservedTables = entity.getReservedTables();
     }
 }

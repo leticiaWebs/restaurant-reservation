@@ -19,39 +19,35 @@ public class RestaurantService {
     private RestaurantRepository repository;
 
     @Transactional
-    public List<RestaurantDTO> findAll(){
+    public List<RestaurantDTO> findAll() {
         List<Restaurant> list = repository.findAll();
         return list.stream().map(RestaurantDTO::new).collect(Collectors.toList());
     }
+
     @Transactional
-    public RestaurantDTO findById(Long id){
+    public RestaurantDTO findById(Long id) {
         Optional<Restaurant> obj = repository.findById(id);
         Restaurant entity = obj.orElseThrow(() -> new ResourceNotFoundException(("Entity not found")));
         return new RestaurantDTO(entity);
     }
 
     @Transactional
-    public RestaurantDTO insert(RestaurantDTO dto){
-        Restaurant entity =  new Restaurant();
+    public RestaurantDTO insert(RestaurantDTO dto) {
+        Restaurant entity = new Restaurant();
         entity.setId(dto.getId());
         entity.setName(dto.getName());
-        entity.setCapacity(dto.getCapacity());
         entity.setLocation(dto.getLocation());
-        entity.setOpeningTime(dto.getOpeningTime());
-        entity.setClosingTime(dto.getClosingTime());
         entity.setFoodType(dto.getFoodType());
         repository.save(entity);
         return new RestaurantDTO(entity);
     }
+
     @Transactional
     public RestaurantDTO update(Long id, RestaurantDTO dto) {
         try{
             Restaurant entity = repository.getReferenceById(id);
             entity.setName(dto.getName());
-            entity.setCapacity(dto.getCapacity());
             entity.setLocation(dto.getLocation());
-            entity.setOpeningTime(dto.getOpeningTime());
-            entity.setClosingTime(dto.getClosingTime());
             entity.setFoodType(dto.getFoodType());
             entity = repository.save(entity);
             return new RestaurantDTO(entity);
@@ -60,8 +56,5 @@ public class RestaurantService {
             throw new ResourceNotFoundException(("Restaurant not found" + dto.name));
         }
     }
-
-
-
-
 }
+

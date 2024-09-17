@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.time.LocalTime;
 
 @Table(name = "tb_restaurant")
 @Getter
@@ -17,18 +16,14 @@ import java.time.LocalTime;
 @Entity
 @NoArgsConstructor
 public class Restaurant implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private LocalTime openingTime;
-    private LocalTime closingTime;
-    private int capacity;
     @JoinColumn(name = "tb_location")
     private Location location;
     @Enumerated(EnumType.STRING)
     private  FoodType foodType;
-    @JoinColumn(name = "tb_reserve")
-    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Reservation reservation;
+
 }

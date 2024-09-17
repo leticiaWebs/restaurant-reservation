@@ -1,6 +1,5 @@
 package com.example.restaurant.reservation.controller;
 
-import com.example.restaurant.reservation.DTO.ReservationDTO;
 import com.example.restaurant.reservation.DTO.RestaurantDTO;
 import com.example.restaurant.reservation.services.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
